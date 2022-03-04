@@ -19,14 +19,15 @@ module.exports = {
     const collectionCate = mongo.db.collection(process.env.COLLECTION_NAME_CATEGORY)
     const collection = mongo.db.collection(process.env.COLLECTION_NAME_PROMISE)
     
-    const resultPres = await collectionPres.find({}).toArray()
-    const resultCate = await collectionCate.find({}).toArray()
+    const resultPres = await collectionPres.find({name : 0, party : 0}).toArray()
+    const resultCate = await collectionCate.find({name : 0}).toArray()
 
     const result = []
     for(let i=0; i<resultPres.length; i++){
         for(let j=0; j<resultCate.length; j++){
+            const maxPro = await collection.find({pres_id : resultPres[i]._id, cate_id : resultCate[j]._id}).count()
             //random 난수를 해당 카테고리에 들어있는 공약 최대 개수만큼 들고오게 만들고싶음
-            let rand = Math.floor(Math.random() * 10);
+            let rand = Math.floor(Math.random() * maxPro);
             //result += collection.find()
         }
     }
@@ -52,8 +53,16 @@ module.exports = {
     return result
   },
   createUserRes: async (mongo, body) => {
+    const collectionPres = mongo.db.collection(process.env.COLLECTION_NAME_PRESIDENT)
+    const collectionUserPro = mongo.db.collection(process.env.COLLECTION_NAME_USER_PROMISE)
     const collection = mongo.db.collection(process.env.COLLECTION_NAME_USER)
 
+    const resultPres = await collectionPres.find({name : 0, party : 0}).toArray() // pres_id 가져오기
+    let resOfSurvey = [0, 0, 0, 0]
+    for(let i=0; i<4; i++){
+        let cnt = 0;
+        //pres_id에 해당하는 항목들 가져오고 선택 결과 반영하기
+    }
     const result = await collection.insertOne(body) //수정 필요
     return result
   },
