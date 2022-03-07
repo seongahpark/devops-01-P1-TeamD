@@ -3,8 +3,8 @@ const { ObjectId } = require('fastify-mongodb')
 module.exports = {
   readAllUserResult: async (mongo, id) => {
     //완료
-    const collection = mongo.db.collection(process.env.COLLECTION_NAME_USER)
-    const result = await collection.find({_id : id}).toArray()
+    const collection = mongo.db.collection(process.env.COLLECTION_NAME_USER_PROMISE)
+    const result = await collection.find({user_id : id}).toArray()
 
     return result
   },
