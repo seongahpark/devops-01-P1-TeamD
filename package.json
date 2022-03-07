@@ -24,6 +24,7 @@
   "homepage": "https://github.com/seongahpark/devops-01-P1-TeamD#readme",
   "dependencies": {
     "autoload": "^0.1.2",
+    "body-parser": "^1.19.2",
     "dotenv": "^16.0.0",
     "fastify": "^3.0.0",
     "fastify-autoload": "^3.10.0",
