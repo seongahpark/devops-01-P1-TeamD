@@ -6,7 +6,6 @@ module.exports = async function (app, opts) {
   app.put('/', async function (request, reply) {
     const tmpId = await chkAuthorizationHeaders(request.headers.authorization)
     const result = await createUserRes(this.mongo, tmpId, request.body)
-    const newRes = await readAllUserResult(this.mongo, tmpId)
 
     if(!result){
       reply
@@ -17,8 +16,7 @@ module.exports = async function (app, opts) {
       reply
         .code(200) //상태코드 보내는 메소드
         .header('Content-Type', 'application/json')
-        //.send({value : newRes, ok : result.ok}) //데이터베이스에서 꺼내와야 함
-        .send({value : newRes, ok : result.ok})
+        .send({value : result.value, ok : result.ok})
     }
   })
 }
