@@ -2,6 +2,8 @@
 
 const path = require('path')
 const AutoLoad = require('fastify-autoload')
+const { appendFile } = require('fs')
+const bodyParser = require('body-parser')
 require('dotenv').config()
 
 module.exports = async function (fastify, opts) {

@@ -1,11 +1,12 @@
 'use strict'
 
-const { deleteOne, deleteUserPromise } = require('../../model')
+const { deleteOne, deleteUserPromise, chkAuthorizationHeaders } = require('../../model')
 
 module.exports = async function (app, opts) {
   app.delete('/:id', async function (request, reply) {
-    const result = await deleteOne(this.mongo, request.params.id)
-    const resultOfUserPromise = await deleteUserPromise(this.mongo, reuqest.params.id)
+    const tmpId = await chkAuthorizationHeaders(request.headers.authorization)
+    const result = await deleteOne(this.mongo, tmpId)
+    const resultOfUserPromise = await deleteUserPromise(this.mongo, tmpId)
     console.log(result)
     if(!result.value && !resultOfUserPromise){
       reply

@@ -1,11 +1,12 @@
 'use strict'
 
-const { updateOne, readOne } = require('../../model')
+const { updateOne, readAllUserResult, chkAuthorizationHeaders } = require('../../model')
 
 module.exports = async function (app, opts) {
   app.put('/:id', async function (request, reply) {
-    const result = await updateOne(this.mongo, request.params.id, request.body)
-    const newRes = await readAllUserResult(this.mongo, request.params.id)
+    const tmpId = await chkAuthorizationHeaders(request.headers.authorization)
+    const result = await updateOne(this.mongo, tmpId, request.body)
+    const newRes = await readAllUserResult(this.mongo, tmpId)
 
     if(!result){
       reply

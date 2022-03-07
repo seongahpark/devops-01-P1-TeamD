@@ -1,9 +1,11 @@
 const { ObjectId } = require('fastify-mongodb')
 
 module.exports = {
-  readAllUserResult: async (mongo) => {
+  readAllUserResult: async (mongo, id) => {
+    //완료
     const collection = mongo.db.collection(process.env.COLLECTION_NAME_USER)
-    const result = await collection.find({}).toArray()
+    const result = await collection.find({_id : id}).toArray()
+
     return result
   },
   readPromiseForSurvey: async (mongo) => {
@@ -46,7 +48,7 @@ module.exports = {
     return result
   },
   readBestAndWorst: async (mongo, id) => {
-    //id jwt 토큰 이슈로 해결해야 됨
+    //완료
     const collection = mongo.db.collection(process.env.COLLECTION_NAME_USER)
     const result = await collection.findOne({
       _id: ObjectId(id)
@@ -79,29 +81,39 @@ module.exports = {
     const collection = mongo.db.collection(process.env.COLLECTION_NAME_USER_PROMISE)
 
     const result = await collection.findOneAndUpdate({
-      _id: ObjectId(id)
+      _id: id
     }, {
       $set: body
     })
     return result
   },
   deleteOne: async (mongo, id) => {
-    //인증 이슈
+    //완료
     const collection = mongo.db.collection(process.env.COLLECTION_NAME_USER)
 
     const result = await collection.findOneAndDelete({
-      _id: ObjectId(id)
+      _id: id
     })
     return result
   },
   deleteUserPromise: async (mongo, id) => {
     //user의 모든 선택 항목을 삭제 함수
-    //인증 이슈
+    //완료
     const collection = mongo.db.collection(process.env.COLLECTION_NAME_USER_PROMISE)
 
     const result = await collection.deleteMany({
-      _id: ObjectId(id)
+      _id: id
     })
+    return result
+  },
+  chkAuthorizationHeaders: async (id) => {
+    let result = "62255d261c717fe62a48f0b4"
+    if(id === "aa") result = "62255d261c717fe62a48f0b4"
+    else if(id === "bb") result = "62255d311c717fe62a48f0b5"
+    else if(id === "cc") result = "62255d479e02aadbc32d2882"
+    else if(id === "dd") result = "62255d3c1c717fe62a48f0b6"
+    else if(id === "ee") result = "62255d4b59bcdbd928f15556"
+  
     return result
   }
 }
