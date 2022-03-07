@@ -51,7 +51,7 @@ module.exports = {
     //완료
     const collection = mongo.db.collection(process.env.COLLECTION_NAME_USER)
     const result = await collection.findOne({
-      _id: id
+      _id: ObjectId(id)
     })
     return result
   },
