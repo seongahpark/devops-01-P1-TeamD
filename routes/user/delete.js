@@ -3,7 +3,7 @@
 const { deleteOne, deleteUserPromise, chkAuthorizationHeaders } = require('../../model')
 
 module.exports = async function (app, opts) {
-  app.delete('/:id', async function (request, reply) {
+  app.delete('/', async function (request, reply) {
     const tmpId = await chkAuthorizationHeaders(request.headers.authorization)
     const result = await deleteOne(this.mongo, tmpId)
     const resultOfUserPromise = await deleteUserPromise(this.mongo, tmpId)

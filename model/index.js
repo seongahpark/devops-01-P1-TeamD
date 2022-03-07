@@ -118,7 +118,7 @@ module.exports = {
     const collection = mongo.db.collection(process.env.COLLECTION_NAME_USER)
 
     const result = await collection.findOneAndDelete({
-      _id: id
+      _id: ObjectId(id)
     })
     return result
   },
@@ -128,7 +128,7 @@ module.exports = {
     const collection = mongo.db.collection(process.env.COLLECTION_NAME_USER_PROMISE)
 
     const result = await collection.deleteMany({
-      _id: id
+      user_id: id
     })
     return result
   },
