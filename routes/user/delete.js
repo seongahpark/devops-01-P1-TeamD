@@ -21,4 +21,22 @@ module.exports = async function (app, opts) {
         .send({value : result.value, ok : result.ok}) //데이터베이스에서 꺼내와야 함
     }
   })
+
+  app.delete('/promise', async function (request, reply) {
+    const tmpId = await chkAuthorizationHeaders(request.headers.authorization)
+    const resultOfUserPromise = await deleteUserPromise(this.mongo, tmpId)
+    console.log(result)
+    if(!resultOfUserPromise){
+      reply
+        .code(204)
+        .header('content-type', 'application/json')
+        .send({value : result.value, ok : result.ok})
+    }
+    else {
+      reply
+        .code(200) //상태코드 보내는 메소드
+        .header('content-type', 'application/json')
+        .send({value : result.value, ok : result.ok}) //데이터베이스에서 꺼내와야 함
+    }
+  })
 }
