@@ -1,0 +1,11 @@
+|Function|Method|Endpoint|Code|request|response|
+|:--|:-----|:-------|:--|:--|:--|
+|선택 내역 조회|GET|/user/promise|200|빈 상태로 전송|[{"_id": 6225a8271da4ae9f6b9a835f","pro_id": "62259cfc40806f664ba02f6d","pres_id": "6221803e67b83b6e5ca47550","choice": false, //반대"user_id": "62255d479e02aadbc32d2882"}...]|
+|설문조사지(질문목록) 가져오기|GET|/promise|200|빈 상태로 전송|[{"_id":"6221a1f34aa8a1233a4ce946","pres_id":6221803e67b83b6e5ca47550","cate_id": "622197cd7c798f87678b6985","contents": "플라스틱 제로 사회로 전환"},	...]|
+|대선 후보별 모든 공약 조회하기|GET|/promise/:id|200|빈 상태로 전송|[{"_id": "6221998a4aa8a1233a4ce90c","pres_id": "6221803e67b83b6e5ca47550","cate_id": "622197a74aa8a1233a4ce907","contents": "무기 체계 첨단화, 자주 국방 역량 확충"},	...}]|
+|best / worst 결과 조회하기|GET|/user|200|빈 상태로 전송|{"best_candi" : "best","worst_candi" : "worst"}|
+|선택 전송하기|POST|/user/promise|201|{"pro_id" : "622198be7c798f87678b6987","pres_id" :"6221807867b83b6e5ca47552","choice" : true or false}|{"value": {"_id": 62255d4b59bcdbd928f15556","name": "나미미"},"ok": 1,}|
+|유저 결과 수정하기|POST|/user/promise|201|{"pro_id" : "622198be7c798f87678b6987","pres_id" :"6221807867b83b6e5ca47552","choice" : true or false}|{"value": {"_id": 62255d4b59bcdbd928f15556","name": "나미미"},"ok": 1,}|
+|best, worst 만들기|PUT|/user|200|빈 상태로 전송|{"value": {"_id": 62255d6559bcdbd928f15557","name": "박토토","best_pres": {"_id":"6221927c67b83b6e5ca47554","name": "안철수","party": "국민의당"},"worst_pres": {"_id": "6221925467b83b6e5ca47553","name": "심상정","party": "정의당"}},"ok": 1}|
+|유저 삭제하기|DELETE|/user|200,404|빈 상태로 전송|if(삭제완료시){{"value": {"_id":"62255d4b59bcdbd928f15556","name": "나미미","best_pres": {"_id": "6221927c67b83b6e5ca47554","name": "안철수","party": "국민의당"},"choice": true,"pres_id":"6221807867b83b6e5ca47552","pro_id":"622198be7c798f87678b6987","worst_pres": {"_id": "6221925467b83b6e5ca47553","name": "심상정","party": "정의당"}},"ok": 1}}else(삭제할 글이 없을시){{"error": "Not Found"}}|
+|유저 삭제하기|DELETE|/user|200,404|빈 상태로 전송|if(삭제완료시){"user_id":"62255d4b59bcdbd928f15556","result": {"acknowledged": true,"deletedCount": 2}}else(삭제할 글이 없을시){{"error": "Not Found"}}|
