@@ -1,11 +1,11 @@
 'use strict'
 
-const { updateOne, readAllUserResult, chkAuthorizationHeaders } = require('../../model')
+const { createUserRes, readAllUserResult, chkAuthorizationHeaders } = require('../../model')
 
 module.exports = async function (app, opts) {
-  app.put('/:id', async function (request, reply) {
+  app.put('/', async function (request, reply) {
     const tmpId = await chkAuthorizationHeaders(request.headers.authorization)
-    const result = await updateOne(this.mongo, tmpId, request.body)
+    const result = await createUserRes(this.mongo, tmpId, request.body)
     const newRes = await readAllUserResult(this.mongo, tmpId)
 
     if(!result){
