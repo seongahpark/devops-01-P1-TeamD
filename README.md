@@ -5,6 +5,7 @@ This project was bootstrapped with Fastify-CLI.
 <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=Node.js&logoColor=white"/>
 <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=MongoDB&logoColor=white"/>
 </div>
+
 ## Summary
 
 > 2022 대선을 맞이해 나와 가장 잘 맞는 / 잘 맞지 않는 대선 후보자를 보기 위한 성향 조사 웹 페이지
