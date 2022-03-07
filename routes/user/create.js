@@ -7,7 +7,6 @@ module.exports = async function (app, opts) {
     const tmpId = await chkAuthorizationHeaders(request.headers.authorization)
     const result = await createOne(this.mongo, tmpId, request.body)
 
-    console.log(result)
     if(!result){
       reply
       .code(404) //상태코드 보내는 메소드
@@ -17,7 +16,7 @@ module.exports = async function (app, opts) {
     reply
       .code(200) //상태코드 보내는 메소드
       .header('content-type', 'application/json')
-      .send({"value" : result.value, "ok": result.ok}) //데이터베이스에서 꺼내와야 함
+      .send({user_id : tmpId, value : result, ok: 1}) //데이터베이스에서 꺼내와야 함
     }
   })
 
@@ -35,7 +34,7 @@ module.exports = async function (app, opts) {
       reply
         .code(200) //상태코드 보내는 메소드
         .header('content-type', 'application/json')
-        .send({"value" : result.value, "ok": result.ok}) //데이터베이스에서 꺼내와야 함
+        .send({user_id : tmpId, value : result, ok: 1}) //데이터베이스에서 꺼내와야 함
     }
   })
 }
